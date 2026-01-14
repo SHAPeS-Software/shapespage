@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
-import ThemeToggle from './components/ThemeToggle.vue'
+import Navbar from './components/Navbar.vue'
 import type { PostCollection } from './types'
 
 const props = defineProps<{ postsData: PostCollection }>()
@@ -21,21 +21,7 @@ onMounted(() => {
     <div
         class="min-h-screen bg-white text-zinc-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100"
     >
-        <header class="border-b border-zinc-200 dark:border-zinc-800">
-            <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-16 items-center justify-between">
-                    <router-link
-                        to="/"
-                        class="text-xl font-bold transition-colors duration-150 hover:text-cyan-500 dark:hover:text-cyan-400"
-                    >
-                        SHAPeS Page
-                    </router-link>
-                    <nav class="flex items-center gap-4">
-                        <ThemeToggle />
-                    </nav>
-                </div>
-            </div>
-        </header>
+        <Navbar />
 
         <main class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
             <RouterView :posts-data="postsData.posts" />
