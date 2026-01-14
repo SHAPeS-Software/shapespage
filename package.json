@@ -2,7 +2,7 @@
     "name": "shapespage",
     "private": true,
     "version": "0.0.0",
-    "debug": true,
+    "debug": false,
     "type": "module",
     "scripts": {
         "dev": "bun run posts && cp dist/posts.json public/posts.json 2>/dev/null; vite",
