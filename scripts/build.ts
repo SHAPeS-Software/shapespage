@@ -14,8 +14,8 @@ const fontData = readFileSync(
 const POSTS_DIR = join(process.cwd(), 'public', 'posts')
 const DIST_DIR = join(process.cwd(), 'dist')
 if (!existsSync(DIST_DIR)) {
-  mkdirSync(DIST_DIR, { recursive: true });
-  console.log('Created dist directory');
+    mkdirSync(DIST_DIR, { recursive: true })
+    console.log('Created dist directory')
 }
 
 interface Frontmatter {

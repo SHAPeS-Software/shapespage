@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { RouterView, useRouter } from 'vue-router'
+import { RouterView } from 'vue-router'
 import ThemeToggle from './components/ThemeToggle.vue'
-import type { Post, PostCollection } from './types'
+import type { PostCollection } from './types'
 
 const props = defineProps<{ postsData: PostCollection }>()
-
-const router = useRouter()
 
 onMounted(() => {
     document.addEventListener('keydown', (e) => {

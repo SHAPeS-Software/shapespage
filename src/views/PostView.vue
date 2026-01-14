@@ -1,29 +1,26 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useTheme } from '../composables/useTheme'
+import { useRoute } from 'vue-router'
 import type { Post } from '../types'
 
 const props = defineProps<{ postsData: Post[] }>()
 
 const route = useRoute()
-const router = useRouter()
-const { isDark } = useTheme()
 
-const post = computed(() => {
-    const slug = route.params.slug as string
-    return props.postsData.find((p) => p.slug === slug)
+const slug = computed<string>(() => {
+    const param = route.params.slug
+    if (typeof param === 'string') return param
+    if (Array.isArray(param)) return param[0] ?? ''
+    return ''
+})
+
+const post = computed<Post | null>(() => {
+    return props.postsData.find((p) => p.slug === slug.value) ?? null
 })
 
 function formatDate(dateStr: string): string {
     const date = new Date(dateStr)
     return date.toISOString().split('T')[0]
-}
-
-function calculateReadTime(content: string): number {
-    const wordsPerMinute = 200
-    const words = content.trim().split(/\s+/).length
-    return Math.ceil(words / wordsPerMinute)
 }
 
 function decodeHtmlEntities(text: string): string {
