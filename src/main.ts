@@ -9,7 +9,7 @@ let postsData: PostCollection = { posts: [], tags: [] }
 
 async function loadPosts(): Promise<PostCollection> {
     try {
-        const response = await fetch('/posts.json')
+        const response = await fetch('/shapespage/assets/posts.json')
         if (response.ok) {
             return await response.json()
         }
