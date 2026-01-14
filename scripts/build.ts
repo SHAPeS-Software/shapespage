@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, copyFileSync } from 'fs'
 import { basename, join } from 'path'
 import { parse } from 'toml'
 import { createHighlighter } from 'shiki'
@@ -265,6 +265,7 @@ async function build() {
 
     const output = { posts: sortedPosts, tags }
     writeFileSync(join(DIST_DIR, 'posts.json'), JSON.stringify(output, null, 2))
+    copyFileSync(join(DIST_DIR, 'posts.json'), join(process.cwd(), 'public', 'posts.json'))
     console.log(`Generated posts.json with ${sortedPosts.length} posts and ${tags.length} tags`)
 
     if (!existsSync(join(DIST_DIR, 'og-images'))) {

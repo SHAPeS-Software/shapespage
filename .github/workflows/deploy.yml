@@ -32,6 +32,9 @@ jobs:
             - name: Install dependencies
               run: bun install
 
+            - name: Build posts
+              run:  bun run posts
+
             - name: Build
               run: bun run build
 
