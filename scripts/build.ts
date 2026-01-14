@@ -213,6 +213,10 @@ async function build() {
             join(ASSET_DIR, 'posts.json'),
             JSON.stringify({ posts: [], tags: [] }, null, 2)
         )
+        writeFileSync(
+            join(DIST_DIR, 'posts.json'),
+            JSON.stringify({ posts: [], tags: [] }, null, 2)
+        )
         return
     }
 
@@ -266,6 +270,7 @@ async function build() {
 
     const output = { posts: sortedPosts, tags }
     writeFileSync(join(ASSET_DIR, 'posts.json'), JSON.stringify(output, null, 2))
+    writeFileSync(join(DIST_DIR, 'posts.json'), JSON.stringify(output, null, 2))
     console.log(`Generated posts.json with ${sortedPosts.length} posts and ${tags.length} tags`)
 
     if (!existsSync(join(DIST_DIR, 'og-images'))) {
