@@ -60,7 +60,8 @@ function calculateReadTime(content: string): number {
 }
 
 function parseFrontmatter(content: string): { frontmatter: Frontmatter; body: string } {
-    const match = content.match(/^[-+]{3}\n([\s\S]*?)\n[-+]{3}\n([\s\S]*)$/)
+    const normalizedContent = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+    const match = normalizedContent.match(/^[-+]{3}\n([\s\S]*?)\n[-+]{3}\n([\s\S]*)$/)
     if (!match) {
         return { frontmatter: { title: '', date: new Date().toISOString() }, body: content }
     }

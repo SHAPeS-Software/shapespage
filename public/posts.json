@@ -19,6 +19,22 @@
       "draft": false
     },
     {
+      "id": "testing-images-on-my-site",
+      "slug": "testing-images-on-my-site",
+      "title": "Testing images on my site",
+      "description": "Testing both local and web based images.",
+      "content": "\n## Testing images\n\nThe cover is web based\n\n### And\n\nThis is local\n\n![Image](/profcool.png)\n",
+      "html": "<p>\n<h2 id=\"Testing images\">Testing images</h2></p><p>The cover is web based</p><p><h3 id=\"And\">And</h3></p><p>This is local</p><p><img src=\"/profcool.png\" alt=\"Image\" class=\"content-image\" loading=\"lazy\" />\n</p>",
+      "date": "2026-01-14T00:00:00.000Z",
+      "tags": [
+        "image-test"
+      ],
+      "coverImage": "https://i.ibb.co/Rkf6m847/Screenshot-2025-12-18-161446.png",
+      "author": "SHAPeS",
+      "readTime": 1,
+      "draft": false
+    },
+    {
       "id": "building-a-minimal-dark-blog-with-vue-3-and-tailwind",
       "slug": "building-a-minimal-dark-blog-with-vue-3-and-tailwind",
       "title": "Building a Minimal Dark Blog with Vue 3 and Tailwind",
@@ -75,6 +91,7 @@
   ],
   "tags": [
     "blog",
+    "image-test",
     "images",
     "javascript",
     "planning",

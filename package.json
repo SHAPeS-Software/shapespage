@@ -2,10 +2,10 @@
     "name": "shapespage",
     "private": true,
     "version": "0.0.0",
-    "debug": false,
+    "debug": true,
     "type": "module",
     "scripts": {
-        "dev": "bun run posts && cp dist/posts.json public/posts.json 2>/dev/null; vite",
+        "dev": "bun run posts && cp dist/assets/posts.json public/posts.json 2>/dev/null; vite",
         "posts": "bun scripts/build.ts",
         "build": "vue-tsc -b --noEmit || true && vite build && bun run posts",
         "preview": "vite preview",

@@ -4,10 +4,10 @@ import './style.css'
 import App from './App.vue'
 import HomeView from './views/HomeView.vue'
 import type { PostCollection } from './types'
-import pkgjson from '../package.json' assert { type: 'json' };
+import pkgjson from '../package.json' assert { type: 'json' }
 
 let postsData: PostCollection = { posts: [], tags: [] }
-const debug = pkgjson.debug ?? false;
+const debug = pkgjson.debug ?? false
 
 async function loadPosts(): Promise<PostCollection> {
     try {
@@ -17,10 +17,12 @@ async function loadPosts(): Promise<PostCollection> {
                 return await response.json()
             }
         } else {
-            console.warn("Currently in Debug mode!")
+            console.warn('Currently in Debug mode!')
             const response = await fetch('./public/posts.json')
             if (response.ok) {
                 return await response.json()
+            } else {
+                console.log('Posts not found')
             }
         }
     } catch {
@@ -66,8 +68,8 @@ loadPosts().then((data) => {
     const app = createApp(App, { postsData })
     app.use(router)
     app.mount('#app')
-    
-console.log(` _______  __   __  _______  _______  _______  _______ 
+
+    console.log(` _______  __   __  _______  _______  _______  _______ 
 |       ||  | |  ||   _   ||       ||       ||       |
 |  _____||  |_|  ||  |_|  ||    _  ||    ___||  _____|
 | |_____ |       ||       ||   |_| ||   |___ | |_____ 
