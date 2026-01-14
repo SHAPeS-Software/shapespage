@@ -4,7 +4,7 @@ defineProps<{
     description: string
     date: string
     tags: string[]
-    slug: string
+    slug?: string
     readTime: number
     coverImage?: string
 }>()
@@ -16,7 +16,7 @@ function formatDate(dateStr: string): string {
 
 <template>
     <article class="group cursor-pointer">
-        <router-link :to="`/posts/${slug!}`" class="block">
+        <router-link :to="`/posts/${slug ?? ''}`" class="block">
             <div
                 v-if="coverImage"
                 class="mb-4 overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800"
