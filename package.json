@@ -1,0 +1,37 @@
+{
+    "name": "shapespage",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "bun run posts && cp dist/posts.json public/posts.json 2>/dev/null; vite",
+        "posts": "bun scripts/build.ts",
+        "build": "bun run posts && vue-tsc -b && vite build",
+        "preview": "vite preview",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "dependencies": {
+        "@fontsource/inter": "^5.2.8",
+        "@resvg/resvg-js": "^2.6.2",
+        "fuse.js": "^7.1.0",
+        "satori": "^0.18.3",
+        "shiki": "^3.21.0",
+        "toml": "^3.0.0",
+        "vue": "^3.5.24",
+        "vue-router": "^4.6.4"
+    },
+    "devDependencies": {
+        "@tailwindcss/typography": "^0.5.19",
+        "@tailwindcss/vite": "^4.1.18",
+        "@types/node": "^24.10.1",
+        "@vitejs/plugin-vue": "^6.0.1",
+        "@vue/tsconfig": "^0.8.1",
+        "prettier": "^3.7.4",
+        "prettier-plugin-tailwindcss": "^0.7.2",
+        "tailwindcss": "^4.1.18",
+        "typescript": "~5.9.3",
+        "vite": "^7.2.4",
+        "vue-tsc": "^3.1.4"
+    }
+}

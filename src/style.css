@@ -1,0 +1,84 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+    --color-cyan-400: #22d3ee;
+    --color-cyan-500: #06b6d4;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        'Segoe UI',
+        system-ui,
+        -apple-system,
+        sans-serif;
+}
+
+.prose img.content-image {
+    border-radius: 0.5rem;
+    margin: 1.5em 0;
+    max-width: 100%;
+    height: auto;
+}
+
+.prose pre {
+    border-radius: 0.5rem;
+    margin: 1.5em 0;
+    overflow-x: auto;
+    background-color: #18181b;
+    border: 1px solid #27272a;
+    padding: 1rem;
+}
+
+.dark .prose pre {
+    background-color: #18181b;
+    border-color: #27272a;
+}
+
+.prose pre code {
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.875em;
+    line-height: 1.7;
+    background: none;
+    color: #e4e4e7;
+}
+
+.dark .prose pre code {
+    color: #e4e4e7;
+}
+
+.prose code:not(pre code) {
+    font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    background-color: rgba(34, 211, 238, 0.1);
+    color: #0891b2;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25em;
+    font-size: 0.875em;
+}
+
+.dark .prose code:not(pre code) {
+    background-color: rgba(34, 211, 238, 0.1);
+    color: #22d3ee;
+}
+
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.2s ease-out;
+}
+
+.page-enter-from,
+.page-leave-to {
+    opacity: 0;
+}
+
+::selection {
+    background-color: rgba(34, 211, 238, 0.3);
+}
+
+.dark ::selection {
+    background-color: rgba(34, 211, 238, 0.3);
+}
