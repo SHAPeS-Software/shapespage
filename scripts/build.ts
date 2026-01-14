@@ -13,6 +13,7 @@ const fontData = readFileSync(
 
 const POSTS_DIR = join(process.cwd(), 'public', 'posts')
 const DIST_DIR = join(process.cwd(), 'dist')
+const ASSET_DIR = join(process.cwd(), 'dist/assets')
 if (!existsSync(DIST_DIR)) {
     mkdirSync(DIST_DIR, { recursive: true })
     console.log('Created dist directory')
@@ -209,7 +210,7 @@ async function build() {
     if (!existsSync(POSTS_DIR)) {
         console.log('No posts directory found, creating empty posts.json')
         writeFileSync(
-            join(DIST_DIR, 'posts.json'),
+            join(ASSET_DIR, 'posts.json'),
             JSON.stringify({ posts: [], tags: [] }, null, 2)
         )
         return
@@ -264,8 +265,7 @@ async function build() {
     const tags = [...allTags].sort()
 
     const output = { posts: sortedPosts, tags }
-    writeFileSync(join(DIST_DIR, 'posts.json'), JSON.stringify(output, null, 2))
-    copyFileSync(join(DIST_DIR, 'posts.json'), join(process.cwd(), 'public', 'posts.json'))
+    writeFileSync(join(ASSET_DIR, 'posts.json'), JSON.stringify(output, null, 2))
     console.log(`Generated posts.json with ${sortedPosts.length} posts and ${tags.length} tags`)
 
     if (!existsSync(join(DIST_DIR, 'og-images'))) {
