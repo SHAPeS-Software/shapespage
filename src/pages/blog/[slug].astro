@@ -1,50 +1,53 @@
 ---
-import Layout from "./Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { getReadingTime } from "../../utils/readingTime";
+import Layout from "../../layouts/Layout.astro";
 
-interface Props {
-    title: string;
-    description: string;
-    author: string;
-    date: Date;
-    tags?: string[];
-    readingTime?: string;
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post: CollectionEntry<"blog">) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
 }
 
-const {
-    title,
-    description,
-    author,
-    date,
-    tags = [],
-    readingTime,
-} = Astro.props;
+interface Props {
+    post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Calculate reading time from markdown content
+const plainText = post.body.replace(/<[^>]*>/g, "").trim();
+const readingTime = getReadingTime(plainText);
 ---
 
 <Layout>
     <article class="blog-post">
         <header class="post-header">
             <a class="goback" href="/blog">Go Back</a>
-            <h1 class="post-title">{title}</h1>
-            <p class="post-description">{description}</p>
+            <h1 class="post-title">{post.data.title}</h1>
+            <p class="post-description">{post.data.description}</p>
 
             <div class="post-meta">
-                <span class="author">By {author}</span>
-                <span class="date"
-                    >{
-                        date.toLocaleDateString("en-US", {
+                <span class="author">By {post.data.author}</span>
+                <span class="date">
+                    {
+                        post.data.date.toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",
                             day: "numeric",
                         })
-                    }</span
-                >
-                {readingTime && <span class="reading-time">{readingTime}</span>}
+                    }
+                </span>
+                <span class="reading-time">{readingTime}</span>
             </div>
 
             {
-                tags.length > 0 && (
+                post.data.tags && post.data.tags.length > 0 && (
                     <div class="tags">
-                        {tags.map((tag) => (
+                        {post.data.tags.map((tag: string) => (
                             <a
                                 href={`/blog/tag/${tag.toLowerCase()}`}
                                 class="tag"
@@ -58,7 +61,7 @@ const {
         </header>
 
         <div class="post-content">
-            <slot />
+            <Content />
         </div>
     </article>
 </Layout>

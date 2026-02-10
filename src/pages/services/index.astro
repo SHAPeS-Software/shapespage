@@ -1,0 +1,86 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+    <div class="services-container">
+        <h1>Services</h1>
+        <h3>SHAPeS Software / Noah Gonzalez</h3>
+        <p class="intro">
+            Static web development, with flexible prices and quality delivery.
+        </p>
+
+        <h1>Skills</h1>
+        <ul>
+            <li>Astro.Js</li>
+            <li>Svelte.Js</li>
+            <li>TailwindCSS</li>
+            <li>General Web (HTML, CSS, JS)</li>
+        </ul>
+
+        <h1>More on me</h1>
+        <p>
+            Big NeoVim user/fan, I know a fair bit on C and Golang and are
+            learning Backend dev with Go. I program mostly as a hobby (though
+            you can change that!)
+        </p>
+
+        <p class="contact">
+            Contact me at <a href="mailto:shapessoft@proton.me"
+                >shapessoft@proton.me</a
+            >!
+        </p>
+    </div>
+</Layout>
+
+<style>
+    .services-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #fff;
+        background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    li {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .intro {
+        font-size: 1.1rem;
+        color: #aaa;
+        margin-bottom: 2rem;
+    }
+
+    .contact {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    a {
+        text-decoration: none;
+        color: palegreen;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .services-container {
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+    }
+</style>

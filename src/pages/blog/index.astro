@@ -1,113 +1,58 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
 
-interface BlogPost {
-    title: string;
-    description: string;
-    author: string;
-    date: Date;
-    category: string;
-    readingTime: string;
-    slug: string;
-}
-
-const posts: BlogPost[] = [
-    {
-        title: "Getting Started with Astro: A Modern Static Site Generator",
-        description: "Discover why Astro is revolutionizing web development with its islands architecture and zero JavaScript approach by default.",
-        author: "Alex Rivera",
-        date: new Date("2024-01-15"),
-        category: "Tutorial",
-        readingTime: "8 min read",
-        slug: "getting-started-with-astro"
-    },
-    {
-        title: "The Future of Web Development: Trends to Watch in 2024",
-        description: "Explore emerging technologies and practices that are shaping the future of web development.",
-        author: "Jordan Smith",
-        date: new Date("2024-01-10"),
-        category: "Trends",
-        readingTime: "6 min read",
-        slug: "future-web-development-trends"
-    },
-    {
-        title: "Optimizing Performance: Advanced CSS Techniques",
-        description: "Learn how to leverage modern CSS features to create performant and maintainable stylesheets.",
-        author: "Casey Chen",
-        date: new Date("2024-01-05"),
-        category: "Performance",
-        readingTime: "10 min read",
-        slug: "css-performance-techniques"
-    },
-    {
-        title: "Building Scalable Applications with TypeScript",
-        description: "A comprehensive guide to using TypeScript for large-scale application development.",
-        author: "Morgan Lee",
-        date: new Date("2023-12-28"),
-        category: "Development",
-        readingTime: "12 min read",
-        slug: "typescript-scalable-apps"
-    },
-    {
-        title: "Understanding Web Components and Custom Elements",
-        description: "Deep dive into building reusable, encapsulated components using Web Components API.",
-        author: "Alex Rivera",
-        date: new Date("2023-12-20"),
-        category: "Tutorial",
-        readingTime: "9 min read",
-        slug: "web-components-guide"
-    },
-    {
-        title: "The Rise of Edge Computing in Modern Web Architecture",
-        description: "Explore how edge computing is transforming where and how web applications are executed.",
-        author: "Jordan Smith",
-        date: new Date("2023-12-15"),
-        category: "Architecture",
-        readingTime: "7 min read",
-        slug: "edge-computing-architecture"
-    }
-];
-
-// Sort by date descending
-const sortedPosts = posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+const posts = await getCollection("blog");
+const sortedPosts = posts.sort(
+    (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+        b.data.date.getTime() - a.data.date.getTime(),
+);
 ---
 
 <Layout>
     <div class="blog-container">
         <header class="blog-header">
             <h1 class="blog-title">Blog</h1>
-            <p class="blog-subtitle">Stories, insights, and perspectives on web development and technology</p>
+            <p class="blog-subtitle">My thoughts,</p>
         </header>
 
         <div class="blog-grid">
-            {sortedPosts.map((post) => (
-                <article class="blog-card">
-                    <div class="card-header">
-                        <span class="category-badge">{post.category}</span>
-                        <span class="reading-time">{post.readingTime}</span>
-                    </div>
-
-                    <h2 class="card-title">
-                        <a href={`/blog/${post.slug}`}>{post.title}</a>
-                    </h2>
-
-                    <p class="card-description">{post.description}</p>
-
-                    <footer class="card-footer">
-                        <div class="post-meta">
-                            <span class="author">{post.author}</span>
-                            <time datetime={post.date.toISOString()}>
-                                {post.date.toLocaleDateString('en-US', {
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: 'numeric'
-                                })}
-                            </time>
+            {
+                sortedPosts.map((post: CollectionEntry<"blog">) => (
+                    <article class="blog-card">
+                        <div class="card-header">
+                            <span class="category-badge">
+                                {post.data.category || "Article"}
+                            </span>
                         </div>
-                        <a href={`/blog/${post.slug}`} class="read-more">Read More →</a>
-                    </footer>
-                </article>
-            ))}
+
+                        <h2 class="card-title">
+                            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                        </h2>
+
+                        <p class="card-description">{post.data.description}</p>
+
+                        <footer class="card-footer">
+                            <div class="post-meta">
+                                <span class="author">{post.data.author}</span>
+                                <time datetime={post.data.date.toISOString()}>
+                                    {post.data.date.toLocaleDateString(
+                                        "en-US",
+                                        {
+                                            year: "numeric",
+                                            month: "short",
+                                            day: "numeric",
+                                        },
+                                    )}
+                                </time>
+                            </div>
+                            <a href={`/blog/${post.slug}`} class="read-more">
+                                Read More →
+                            </a>
+                        </footer>
+                    </article>
+                ))
+            }
         </div>
 
         <section class="newsletter-section">
@@ -162,7 +107,11 @@ const sortedPosts = posts.sort((a, b) => b.date.getTime() - a.date.getTime());
     }
 
     .blog-card {
-        background: linear-gradient(135deg, rgba(50, 69, 255, 0.05) 0%, rgba(188, 82, 238, 0.05) 100%);
+        background: linear-gradient(
+            135deg,
+            rgba(50, 69, 255, 0.05) 0%,
+            rgba(188, 82, 238, 0.05) 100%
+        );
         border: 1px solid #333;
         border-radius: 12px;
         padding: 2rem;
@@ -192,11 +141,6 @@ const sortedPosts = posts.sort((a, b) => b.date.getTime() - a.date.getTime());
         font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
-    }
-
-    .reading-time {
-        font-size: 0.85rem;
-        color: #666;
     }
 
     .card-title {
@@ -253,7 +197,11 @@ const sortedPosts = posts.sort((a, b) => b.date.getTime() - a.date.getTime());
     }
 
     .newsletter-section {
-        background: linear-gradient(135deg, rgba(50, 69, 255, 0.1) 0%, rgba(188, 82, 238, 0.1) 100%);
+        background: linear-gradient(
+            135deg,
+            rgba(50, 69, 255, 0.1) 0%,
+            rgba(188, 82, 238, 0.1) 100%
+        );
         border: 1px solid #333;
         border-radius: 12px;
         padding: 3rem 2rem;
