@@ -37,7 +37,7 @@ const sortedPosts: BlogEntry[] = posts.sort(
                         </div>
 
                         <h2 class="card-title">
-                            <a href={`${base}blog/${post.slug}`}>
+                            <a href={base + "/blog/" + post.slug}>
                                 {post.data.title}
                             </a>
                             <br />
@@ -71,7 +71,7 @@ const sortedPosts: BlogEntry[] = posts.sort(
                                 </time>
                             </div>
                             <a
-                                href={`${base}blog/${post.slug}`}
+                                href={base + "/blog/" + post.slug}
                                 class="read-more"
                             >
                                 Read More →

@@ -27,7 +27,7 @@ const readingTime = getReadingTime(plainText);
 <Layout>
     <article class="blog-post">
         <header class="post-header">
-            <a class="goback" href={base + "blog"}>Go Back</a>
+            <a class="goback" href={base + "/blog"}>Go Back</a>
             <h1 class="post-title">{post.data.title}</h1>
             <p class="post-description">{post.data.description}</p>
             {
@@ -63,7 +63,7 @@ const readingTime = getReadingTime(plainText);
                     <div class="tags">
                         {post.data.tags.map((tag: string) => (
                             <a
-                                href={`${base}blog/tag/${tag.toLowerCase()}`}
+                                href={`${base}/blog/tag/${tag.toLowerCase()}`}
                                 class="tag"
                             >
                                 #{tag}
