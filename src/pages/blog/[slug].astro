@@ -33,7 +33,7 @@ const readingTime = getReadingTime(plainText);
             {
                 post.data.image && (
                     <img
-                        src={post.data.image}
+                        src={base + post.data.image}
                         alt={post.data.title || "Post thumbnail"}
                         width="800"
                         height="450"

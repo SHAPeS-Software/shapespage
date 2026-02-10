@@ -43,7 +43,7 @@ const sortedPosts: BlogEntry[] = posts.sort(
                             <br />
                             {post.data.image && (
                                 <img
-                                    src={post.data.image}
+                                    src={base + post.data.image}
                                     alt={post.data.title || "Post thumbnail"}
                                     width="1000"
                                     height="450"
