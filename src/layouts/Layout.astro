@@ -1,3 +1,7 @@
+---
+const base = import.meta.env.BASE_URL || "/";
+---
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -11,7 +15,7 @@
     <body>
         <nav class="navbar">
             <div class="nav-container">
-                <a href="/" class="nav-logo"
+                <a href={base} class="nav-logo"
                     >SHAPeS-Page
                     <svg
                         width="28px"
@@ -30,9 +34,9 @@
                     >
                 </a>
                 <ul class="nav-menu">
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/info">Info</a></li>
+                    <li><a href={base + "blog"}>Blog</a></li>
+                    <li><a href={base + "services"}>Services</a></li>
+                    <li><a href={base + "info"}>Info</a></li>
                 </ul>
             </div>
         </nav>
