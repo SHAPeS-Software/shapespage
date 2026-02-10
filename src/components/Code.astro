@@ -1,0 +1,161 @@
+---
+import { codeToHtml } from "shiki";
+
+interface Props {
+    lang?: string;
+    title?: string;
+    lineNumbers?: boolean;
+    wrap?: boolean;
+}
+
+const {
+    lang = "plaintext",
+    title,
+    lineNumbers = false,
+    wrap = false,
+} = Astro.props;
+
+const rawCode = await Astro.slots.render("default");
+const trimmedCode = rawCode.trim();
+
+let highlightedHtml = "";
+
+try {
+    highlightedHtml = await codeToHtml(trimmedCode, {
+        lang,
+        theme: "nord",
+    });
+} catch (err) {
+    console.error("Shiki highlighting failed:", err);
+    highlightedHtml = `<pre><code>${escapeHtml(trimmedCode)}</code></pre>`;
+}
+
+function escapeHtml(unsafe: string): string {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+const headerText =
+    title || (lang !== "plaintext" ? lang.toUpperCase() : "Code");
+---
+
+<div class="code-wrapper" data-line-numbers={lineNumbers}>
+    <div class="code-header">
+        <span class="code-lang-title">{headerText}</span>
+    </div>
+
+    <div
+        class:list={["shiki-container", { wrap: wrap }]}
+        set:html={highlightedHtml}
+    />
+</div>
+
+<style is:global>
+    .code-wrapper {
+        margin: 1.75rem 0;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #2a2a2a;
+        background: #0f0f0f; /* darker background */
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    .code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #181818; /* even darker header */
+        padding: 0.65rem 1.25rem;
+        border-bottom: 1px solid #222;
+        font-size: 0.85rem;
+        color: #cccccc; /* brighter header text */
+    }
+
+    .code-lang-title {
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        color: #e0e0e0; /* slightly brighter title */
+    }
+
+    .shiki-container {
+        padding: 1.4rem 1.5rem;
+        overflow-x: auto;
+    }
+
+    .shiki-container.wrap pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    /* Line numbers */
+    [data-line-numbers] .line::before {
+        content: counter(line);
+        counter-increment: line;
+        display: inline-block;
+        width: 2.5rem;
+        margin-right: 1.25rem;
+        text-align: right;
+        color: #606060;
+        user-select: none;
+    }
+
+    [data-line-numbers] pre {
+        counter-reset: line;
+    }
+
+    pre,
+    code {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .line {
+        display: flex;
+    }
+
+    /* Force brighter text for Nord theme + dark bg */
+    :global(.shiki) {
+        background-color: transparent !important;
+        color: #e5e9f0 !important; /* very bright foreground for better contrast */
+    }
+
+    /* Common Nord tokens - make sure they're bright enough */
+    :global(.shiki .token.comment),
+    :global(.shiki .token.prolog),
+    :global(.shiki .token.doctype),
+    :global(.shiki .token.cdata) {
+        color: #7e8a9a !important; /* still readable but softer */
+    }
+
+    :global(.shiki .token.punctuation) {
+        color: #c5d0e6 !important;
+    }
+
+    :global(.shiki .token.keyword),
+    :global(.shiki .token.operator),
+    :global(.shiki .token.tag) {
+        color: #88c0d0 !important; /* bright cyan */
+    }
+
+    :global(.shiki .token.string),
+    :global(.shiki .token.attr-value) {
+        color: #a3be8c !important; /* bright green */
+    }
+
+    :global(.shiki .token.function),
+    :global(.shiki .token.class-name) {
+        color: #8fbcbb !important;
+    }
+
+    :global(.shiki .token.number),
+    :global(.shiki .token.boolean) {
+        color: #b48ead !important; /* bright purple */
+    }
+</style>
