@@ -18,7 +18,6 @@ interface Props {
 const { post } = Astro.props;
 const { Content } = await post.render();
 
-// Calculate reading time from markdown content
 const plainText = post.body.replace(/<[^>]*>/g, "").trim();
 const readingTime = getReadingTime(plainText);
 ---
@@ -29,6 +28,19 @@ const readingTime = getReadingTime(plainText);
             <a class="goback" href="/blog">Go Back</a>
             <h1 class="post-title">{post.data.title}</h1>
             <p class="post-description">{post.data.description}</p>
+            {
+                post.data.image && (
+                    <img
+                        src={post.data.image}
+                        alt={post.data.title || "Post thumbnail"}
+                        width="800"
+                        height="450"
+                        loading="eager"
+                        decoding="async"
+                        class="post-thumbnail"
+                    />
+                )
+            }
 
             <div class="post-meta">
                 <span class="author">By {post.data.author}</span>
@@ -148,6 +160,16 @@ const readingTime = getReadingTime(plainText);
         text-decoration: underline;
         color: #3245ff;
         transition: 0.2s all;
+    }
+
+    .post-thumbnail {
+        width: 100%;
+        height: 450px; /* or whatever height you prefer */
+        object-fit: cover; /* crops to fill the space without distortion */
+        object-position: center; /* centers the crop */
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        display: block;
     }
 
     .goback:hover {
