@@ -15,4 +15,4 @@ I'd also recommend watching JBlow's streams on Jai, they're archived on YouTube.
 
 ## Sources
 
-- [Jon's Jai Playlist](https://www.youtube.com/watch?v=TH9VCN6UkyQ&list=PLmV5I2fxaiCKfxMBrNsU1kgKJXD3PkyxO)
+- <a href="https://www.youtube.com/watch?v=TH9VCN6UkyQ&list=PLmV5I2fxaiCKfxMBrNsU1kgKJXD3PkyxO" target="_blank">Jon's Jai Playlist</a>
