@@ -1,0 +1,25 @@
+---
+const base = import.meta.env.BASE_URL || "/";
+
+const props = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<SEO
+  title={props.title}
+  description={props.description}
+  canonical={canonical}
+  twitter={{ card: 'summary_large_image' }}
+  openGraph={{
+    basic: {
+      title: props.title,
+      type: 'website',
+      url: canonical,
+      image: props.ogImage || base + "/og-image.jpg", // provide a fallback OG image
+    },
+    optional: {
+      description: props.description,
+      siteName: 'SHAPeS Page',
+    }
+  }}
+/>
