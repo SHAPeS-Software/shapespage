@@ -7,6 +7,5 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://shapes-soft.github.io",
   base: "/shapespage",
-  trailingSlash: "always",
   integrations: [sitemap()],
 });

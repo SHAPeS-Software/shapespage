@@ -1,14 +1,20 @@
-import { codeToHtml } from 'shiki';
+import { codeToHtml } from "shiki";
 
-export async function highlightCode(code: string, lang: string = 'plaintext'): Promise<string> {
+export async function highlightCode(
+  code: string,
+  lang: string = "plaintext",
+): Promise<string> {
   try {
     const html = await codeToHtml(code, {
       lang,
-      theme: 'nord',
+      theme: "nord",
     });
     return html;
   } catch (error) {
-    console.error(`Failed to highlight code block with language ${lang}:`, error);
+    console.error(
+      `Failed to highlight code block with language ${lang}:`,
+      error,
+    );
     // Return escaped code as fallback
     return `<pre><code>${escapeHtml(code)}</code></pre>`;
   }
@@ -16,11 +22,11 @@ export async function highlightCode(code: string, lang: string = 'plaintext'): P
 
 function escapeHtml(text: string): string {
   const map: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;',
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
   };
   return text.replace(/[&<>"']/g, (char) => map[char]);
 }

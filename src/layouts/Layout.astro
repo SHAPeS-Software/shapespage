@@ -1,8 +1,8 @@
 ---
 const base = import.meta.env.BASE_URL || "/";
 
-import SEO from '../components/SEO.astro';
-const { title, description, ogImage } = Astro.props;
+// import SEO from '../components/SEO.astro';
+// const { title, description, ogImage } = Astro.props;
 ---
 
 <!doctype html>
@@ -11,30 +11,15 @@ const { title, description, ogImage } = Astro.props;
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href={base + "/favicon.svg"} />
-        <SEO title={title} description={description} ogImage={ogImage} />
+        <!-- <SEO title={`title`} description={`description`} ogImage={`ogImage`} /> -->
         <meta name="generator" content={Astro.generator} />
         <title>SHAPeS Page</title>
     </head>
     <body>
         <nav class="navbar">
             <div class="nav-container">
-                <a href={base} class="nav-logo"
-                    >SHAPeS-Page
-                    <svg
-                        width="28px"
-                        height="28px"
-                        viewBox="0 0 1.5 1.5"
-                        version="1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        enable-background="new 0 0 48 48"
-                        ><path
-                            fill="#FFA000"
-                            d="M1.25 0.375H0.688l-0.125 -0.125H0.25c-0.069 0 -0.125 0.056 -0.125 0.125v0.25h1.25v-0.125c0 -0.069 -0.056 -0.125 -0.125 -0.125"
-                        ></path><path
-                            fill="#FFCA28"
-                            d="M1.25 0.375H0.25c-0.069 0 -0.125 0.056 -0.125 0.125v0.625c0 0.069 0.056 0.125 0.125 0.125h1c0.069 0 0.125 -0.056 0.125 -0.125V0.5c0 -0.069 -0.056 -0.125 -0.125 -0.125"
-                        ></path></svg
-                    >
+                <a href={base} class="nav-logo">
+                    SHAPeS-Page
                 </a>
                 <ul class="nav-menu">
                     <li><a href={base + "/blog"}>Blog</a></li>
